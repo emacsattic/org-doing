@@ -27,6 +27,15 @@
 
 (provide 'org-doing)
 
+(defgroup org-doing nil
+  "Customization of org-doing"
+  :version "0.1")
+
+(defcustom org-doing-file "~/doing.org"
+  "The file where org-doing stores what you're doing now and later."
+  :type '(string)
+  :group 'org-doing)
+
 ;;;###autoload
 (defun org-doing-log ((later-p nil) description)
   "Logs the `description' of what you're doing now in the file
