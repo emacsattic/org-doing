@@ -36,6 +36,13 @@
   :type '(string)
   :group 'org-doing)
 
+(defun org-doing-find-or-create-file ()
+  "Opens the `org-doing-file', if it doesn't exist, creates it."
+  (find-file org-doing-file)
+  (unless (file-exists-p org-doing-file)
+    (insert "#+TITLE: doing\n"
+            "#+TODO: TODO LATER | DONE\n\n")))
+
 ;;;###autoload
 (defun org-doing-log ((later-p nil) description)
   "Logs the `description' of what you're doing now in the file
