@@ -23,6 +23,7 @@
 ;; along with org-doing. If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Code:
+(require 'cl)
 (require 'org)
 
 (provide 'org-doing)
