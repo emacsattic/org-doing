@@ -84,4 +84,21 @@ TODO item as DONE (see `org-doing-done-most-recent-item'.)"
   (if (search-forward-regexp "^* TODO" nil t)
     (replace-match "* DONE")))
 
+;;;###autoload
+(defun org-doing (command)
+  "Interactive function for running any org-doing command.
+
+The first part of the `command' string is parsed as a command:
+- now: calls `org-doing-log'
+- later: calls `org-doing-log'
+- done: calls `org-doing-done'
+"
+  (interactive "sDoing? ")
+  (let* ((first-space (search " " command))
+         (cmd (downcase (subseq command 0 first-space)))
+         (args (subseq command (+ first-space 1))))
+    (cond ((string= cmd "now") (org-doing-log args))
+          ((string= cmd "later") (org-doing-log args t))
+          ((string= cmd "done") (org-doing-done args)))))
+
 ;;; org-doing.el ends here
