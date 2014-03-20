@@ -57,7 +57,8 @@ P")
   (if (search-forward-regexp "^* " nil t)
       (beginning-of-line)
     (goto-char (point-max)))
-  (insert "* " (if (not (null later-p)) "LATER" "TODO") " " description "\n")
+  (insert "* " (if (not (null later-p)) "LATER" "TODO") " " description "\n"
+          "  " (format-time-string "<%Y-%m-%d %a %H:%M>\n"))
   (save-buffer)
   (kill-buffer))
 
