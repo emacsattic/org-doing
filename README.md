@@ -19,3 +19,12 @@ Log what you're doing now:
 Log what you're doing later:
 
     C-u M-x org-doing-log
+
+Log something you've already done:
+
+    M-x org-doing-done
+
+Mark your most recent TODO as DONE:
+
+    M-x org-doing-done
+    (don't enter anything and press Enter)
