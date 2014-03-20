@@ -44,11 +44,19 @@
             "#+TODO: TODO LATER | DONE\n\n")))
 
 ;;;###autoload
-(defun org-doing-log ((later-p nil) description)
+(defun org-doing-log (description &optional later-p)
   "Logs the `description' of what you're doing now in the file
-`org-doing-file'. When `later-p' is true, logs the item under the
-\"Later\" heading."
-  (interactive)
-  )
+`org-doing-file' at the *top* of the file.
+
+When `later-p' is true, logs the item as something to be done
+later."
+  (interactive "sDoing? 
+P")
+  (org-doing-find-or-create-file)
+  (when (search-forward "* " nil t)
+    (goto-char (point-max)))
+  (insert "* " (if (not (null later-p)) "LATER" "TODO") " " description "\n")
+  (save-buffer)
+  (kill-buffer))
 
 ;;; org-doing.el ends here
