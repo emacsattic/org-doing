@@ -37,9 +37,12 @@
   :group 'org-doing)
 
 (defun org-doing-find-or-create-file ()
-  "Opens the `org-doing-file', if it doesn't exist, creates it."
+  "Opens the `org-doing-file', if it doesn't exist, creates it.
+
+If it exists, goes to the beginning of the file."
   (find-file org-doing-file)
-  (unless (file-exists-p org-doing-file)
+  (if (file-exists-p org-doing-file)
+      (goto-char (point-min))
     (insert "#+TITLE: doing\n"
             "#+STARTUP: overview\n"
             "#+TODO: TODO LATER | DONE\n\n")))
