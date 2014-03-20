@@ -62,6 +62,23 @@ P")
   (save-buffer)
   (kill-buffer))
 
+(defun org-doing-done (description)
+  "Inserts a new heading into `org-doing-file' that's marked as DONE.
+
+If `description' is nil or a blank string, marks the most recent
+TODO item as DONE (see `org-doing-done-most-recent-item'.)"
+  (interactive "sDone? ")
+  (org-doing-find-or-create-file)
+  (if (= (length description) 0)
+      (org-doing-done-most-recent-item)
+    (if (search-forward-regexp "^* " nil t)
+        (beginning-of-line)
+      (goto-char (point-max)))
+    (insert "* DONE " description "\n"
+            "  " (format-time-string "<%Y-%m-%d %a %H:%M>\n")))
+  (save-buffer)
+  (kill-buffer))
+
 (defun org-doing-done-most-recent-item ()
   "Marks the most recent item in `org-doing-file' as DONE."
   (org-doing-find-or-create-file)
