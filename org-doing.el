@@ -59,8 +59,7 @@ P")
     (goto-char (point-max)))
   (insert "* " (if (not (null later-p)) "LATER" "TODO") " " description "\n"
           "  " (format-time-string "<%Y-%m-%d %a %H:%M>\n"))
-  (save-buffer)
-  (kill-buffer))
+  (save-buffer))
 
 (defun org-doing-done (description)
   "Inserts a new heading into `org-doing-file' that's marked as DONE.
@@ -76,8 +75,7 @@ TODO item as DONE (see `org-doing-done-most-recent-item'.)"
       (goto-char (point-max)))
     (insert "* DONE " description "\n"
             "  " (format-time-string "<%Y-%m-%d %a %H:%M>\n")))
-  (save-buffer)
-  (kill-buffer))
+  (save-buffer))
 
 (defun org-doing-done-most-recent-item ()
   "Marks the most recent item in `org-doing-file' as DONE."
