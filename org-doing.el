@@ -81,10 +81,7 @@ TODO item as DONE (see `org-doing-done-most-recent-item'.)"
 
 (defun org-doing-done-most-recent-item ()
   "Marks the most recent item in `org-doing-file' as DONE."
-  (org-doing-find-or-create-file)
-  (when (search-forward-regexp "^* TODO" nil t)
-    (replace-match "* DONE")
-    (save-buffer)
-    (kill-buffer)))
+  (if (search-forward-regexp "^* TODO" nil t)
+    (replace-match "* DONE")))
 
 ;;; org-doing.el ends here
