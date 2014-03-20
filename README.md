@@ -55,3 +55,15 @@ This is also works for later and for done:
     M-x org-doing
     done
 
+## From The Bash Command-Line
+
+You can also use org-doing from the command line by defining the
+`ORG_DOING_PATH` environment variable to the location of
+`org-doing.el` and by sourcing `org-doing.bash`:
+
+    ORG_DOING_PATH=/path/to/org-doing.el
+    source /path/to/org-doing.bash
+    doing now awesome stuff
+    doing later more awesome
+    doing done something cool
+    doing done
