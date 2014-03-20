@@ -41,6 +41,7 @@
   (find-file org-doing-file)
   (unless (file-exists-p org-doing-file)
     (insert "#+TITLE: doing\n"
+            "#+STARTUP: overview\n"
             "#+TODO: TODO LATER | DONE\n\n")))
 
 ;;;###autoload
