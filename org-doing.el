@@ -54,7 +54,8 @@ later."
   (interactive "sDoing? 
 P")
   (org-doing-find-or-create-file)
-  (when (search-forward "* " nil t)
+  (if (search-forward-regexp "^* " nil t)
+      (beginning-of-line)
     (goto-char (point-max)))
   (insert "* " (if (not (null later-p)) "LATER" "TODO") " " description "\n")
   (save-buffer)
