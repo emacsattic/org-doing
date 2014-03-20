@@ -12,6 +12,8 @@ later section lists things you want to work on later.
 
 ## Use it
 
+### Org-Doing Functions
+
 Log what you're doing now:
 
     M-x org-doing-log
@@ -28,3 +30,28 @@ Mark your most recent TODO as DONE:
 
     M-x org-doing-done
     (don't enter anything and press Enter)
+
+### Org-Doing Omni Function
+
+The omni function lets you enter short-hands at the beginning, making it very quick to use org-doing:
+
+    M-x org-doing
+    now reviewing email, getting ready for a nap. seriously
+
+The "now" is parsed and the `org-doing-log` function is called with
+the rest of the string. It's the same as doing this:
+
+    M-x org-doing-log
+    reviewing email, getting ready for a nap. seriously
+
+This is also works for later and for done:
+
+    M-x org-doing
+    later adding more cool features to org-doing mode
+    
+    M-x org-doing
+    done added something simply amazing to org-doing mode
+
+    M-x org-doing
+    done
+
