@@ -61,4 +61,12 @@ P")
   (save-buffer)
   (kill-buffer))
 
+(defun org-doing-done-most-recent-item ()
+  "Marks the most recent item in `org-doing-file' as DONE."
+  (org-doing-find-or-create-file)
+  (when (search-forward-regexp "^* TODO" nil t)
+    (replace-match "* DONE")
+    (save-buffer)
+    (kill-buffer)))
+
 ;;; org-doing.el ends here
