@@ -61,7 +61,7 @@ P")
   (if (search-forward-regexp "^* " nil t)
       (beginning-of-line)
     (goto-char (point-max)))
-  (insert "* " (if (not (null later-p)) "LATER" "TODO") " " description "\n"
+  (insert "* " (if later-p "LATER" "TODO") " " description "\n"
           "  " (format-time-string "<%Y-%m-%d %a %H:%M>\n"))
   (save-buffer))
 
@@ -72,7 +72,7 @@ If `description' is nil or a blank string, marks the most recent
 TODO item as DONE (see `org-doing-done-most-recent-item'.)"
   (interactive "sDone? ")
   (org-doing-find-or-create-file)
-  (if (= (length description) 0)
+  (if (zerop (length description))
       (org-doing-done-most-recent-item)
     (if (search-forward-regexp "^* " nil t)
         (beginning-of-line)
