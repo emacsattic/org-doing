@@ -1,5 +1,10 @@
 # org-doing
 
+[![Build Status](https://travis-ci.org/AdrieanKhisbe/org-doing.el.svg)](https://travis-ci.org/AdrieanKhisbe/org-doing)
+[![MELPA](http://melpa.org/packages/org-doing-badge.svg)](http://melpa.org/#/org-doing)
+[![MELPA stable](http://stable.melpa.org/packages/org-doing-badge.svg)](http://stable.melpa.org/#/org-doing)
+[![License](http://img.shields.io/:license-gpl3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
+
 Inspired by [doing](https://github.com/ttscoff/doing/), a set of
 functions for keeping track of what you're doing right now.
 
@@ -48,7 +53,7 @@ This is also works for later and for done:
 
     M-x org-doing
     later adding more cool features to org-doing mode
-    
+
     M-x org-doing
     done added something simply amazing to org-doing mode
 
