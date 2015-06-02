@@ -1,2 +1,4 @@
-/org-doing.el~
-/org-doing.bash~
+.cask
+*.elc
+¬*
+*~
