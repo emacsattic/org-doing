@@ -1,6 +1,6 @@
 # org-doing
 
-[![Build Status](https://travis-ci.org/AdrieanKhisbe/org-doing.el.svg)](https://travis-ci.org/AdrieanKhisbe/org-doing)
+[![Build Status](https://travis-ci.org/omouse/org-doing.svg)](https://travis-ci.org/omouse/org-doing)
 [![MELPA](http://melpa.org/packages/org-doing-badge.svg)](http://melpa.org/#/org-doing)
 [![MELPA stable](http://stable.melpa.org/packages/org-doing-badge.svg)](http://stable.melpa.org/#/org-doing)
 [![License](http://img.shields.io/:license-gpl3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
