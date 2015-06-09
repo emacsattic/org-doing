@@ -55,8 +55,7 @@ If it exists, goes to the beginning of the file."
 
 When `later-p' is true, logs the item as something to be done
 later."
-  (interactive "sDoing? 
-P")
+  (interactive "sDoing? \nP")
   (org-doing-find-or-create-file)
   (if (search-forward-regexp "^* " nil t)
       (beginning-of-line)
@@ -103,4 +102,6 @@ The first part of the `command' string is parsed as a command:
           ((string= cmd "later") (org-doing-log args t))
           ((string= cmd "done") (org-doing-done args)))))
 
+
+(provide 'org-doing)
 ;;; org-doing.el ends here
