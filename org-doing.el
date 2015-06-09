@@ -30,7 +30,8 @@
 
 (defgroup org-doing nil
   "Customization of org-doing"
-  :version "0.1")
+  :version "0.1"
+  :group 'org)
 
 (defcustom org-doing-file "~/doing.org"
   "The file where org-doing stores what you're doing now and later."
