@@ -98,7 +98,9 @@ The first part of the `command' string is parsed as a command:
   (interactive "sDoing? ")
   (let* ((first-space (search " " command))
          (cmd (downcase (subseq command 0 first-space)))
-         (args (subseq command (+ first-space 1))))
+         (args (if first-space
+                   (subseq command (+ first-space 1))
+                 nil)))
     (cond ((string= cmd "now") (org-doing-log args))
           ((string= cmd "later") (org-doing-log args t))
           ((string= cmd "done") (org-doing-done args)))))
