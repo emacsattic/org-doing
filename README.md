@@ -72,3 +72,19 @@ You can also use org-doing from the command line by defining the
     doing later more awesome
     doing done something cool
     doing done
+
+# Hacking on org-doing
+
+Start by installing all the dependencies in the Caskfile:
+
+    cask install
+
+We use GNU Make for running unit tests, feature tests and for installing org-doing.
+
+Run the tests:
+
+    make test
+    make unit # run the unit tests using ERT
+    make ecukes # run the feature tests using ecukes
+
+[ERT](https://www.gnu.org/software/emacs/manual/html_mono/ert.html) is the Emacs Lisp Regression Testing framework. [Ecukes](https://github.com/ecukes/ecukes) is an implementation of Cucumber/BDD.
