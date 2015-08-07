@@ -1,6 +1,6 @@
 ;;; org-doing.el --- Keep track of what you're doing
 
-;; Copyright (C) 2014 Rudolf Olah <omouse@gmail.com>
+;; Copyright (C) 2014, 2015 Rudolf Olah <omouse@gmail.com>
 
 ;; Author: Rudolf Olah
 ;; URL: https://github.com/omouse/org-doing
@@ -98,7 +98,9 @@ The first part of the `command' string is parsed as a command:
   (interactive "sDoing? ")
   (let* ((first-space (search " " command))
          (cmd (downcase (subseq command 0 first-space)))
-         (args (subseq command (+ first-space 1))))
+         (args (if first-space
+                   (subseq command (+ first-space 1))
+                 nil)))
     (cond ((string= cmd "now") (org-doing-log args))
           ((string= cmd "later") (org-doing-log args t))
           ((string= cmd "done") (org-doing-done args)))))

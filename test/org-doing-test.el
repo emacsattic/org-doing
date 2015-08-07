@@ -5,9 +5,6 @@
 
 ;;; Code:
 
-(ert-deftest org-doing-should-not-pass ()
-  (should-not nil))
-
 (ert-deftest org-doing-done-with-args ()
   "Org-doing omni command should handle done with one or more arguments."
   (with-mock
