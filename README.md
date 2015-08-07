@@ -87,6 +87,6 @@ Run the tests:
     make unit # run the unit tests using ERT
     make ecukes # run the feature tests using ecukes
 
-[ERT](https://www.gnu.org/software/emacs/manual/html_mono/ert.html) is the Emacs Lisp Regression Testing framework. [Ecukes](https://github.com/ecukes/ecukes) is an implementation of Cucumber/BDD.
+[ERT](https://www.gnu.org/software/emacs/manual/html_mono/ert.html) is the Emacs Lisp Regression Testing framework. [Ecukes](https://github.com/ecukes/ecukes) is an implementation of Cucumber/BDD. [El-mock](http://emacswiki.org/emacs/EmacsLispMock) is used for mock objects/stubbing in the unit tests.
 
 Unit tests are in the `test/` directory. Higher level/integration/functional specs are in the `features/` directory.
