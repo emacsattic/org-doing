@@ -1,6 +1,6 @@
 ;;; org-doing.el --- Keep track of what you're doing
 
-;; Copyright (C) 2014 Rudolf Olah <omouse@gmail.com>
+;; Copyright (C) 2014, 2015 Rudolf Olah <omouse@gmail.com>
 
 ;; Author: Rudolf Olah
 ;; URL: https://github.com/omouse/org-doing

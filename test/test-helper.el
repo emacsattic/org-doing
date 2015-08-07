@@ -32,6 +32,7 @@
      (f-delete default-directory :force)))
 
 (require 'ert)
+(require 'el-mock)
 (require 'org-doing (f-expand "org-doing" org-doing-root-path))
 
 (provide 'test-helper)
