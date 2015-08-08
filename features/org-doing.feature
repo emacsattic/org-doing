@@ -1,11 +1,21 @@
-Feature: Do Some things
-  In order to do something
-  As a user
-  I want to do something
+Feature: Opening org-doing file
+  Scenario: Insert the header for a non-existent file
+    Given I have a non-existent org-doing-file
+    When I have opened the org-doing-file
+    Then the org-doing-file should start with:
+    """
+    #+TITLE: doing
+    #+STARTUP: overview
+    #+TODO: TODO LATER | DONE
+    """
 
-  Scenario: Do Something
-    Given I have "something"
-    When I have "something"
-    Then I should have "something"
-    And I should have "something"
-    But I should not have "something"
+  Scenario: Do not insert header for existing file
+    Given I have an existing org-doing-file
+    When I have opened the org-doing-file
+    Then the org-doing-file will not be modified
+
+Feature: Save and bury buffer of org-doing file
+  Scenario: Save and bury the buffer after logging
+    Given I have an existing org-doing-file
+    When I log to the file
+    Then the buffer will be saved and buried

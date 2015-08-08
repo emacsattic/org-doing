@@ -21,10 +21,15 @@
 
 (Before
  ;; Before each scenario is run
+ (setq org-doing-original-doing-file org-doing-file)
+ (set-variable 'org-doing-file (make-temp-file "orgdoing-test"))
  )
 
 (After
  ;; After each scenario is run
+ (let ((test-file org-doing-file))
+   (set-variable 'org-doing-file org-doing-original-doing-file)
+   (delete-file test-file))
  )
 
 (Teardown
