@@ -109,7 +109,7 @@ command string.
     (cond ((string= cmd "now") (org-doing-log args))
           ((string= cmd "later") (org-doing-log args t))
           ((string= cmd "done") (org-doing-done args))
-          (t (org-doing-log (concat cmd " " args))))))
+          (t (org-doing-log command)))))
 
 
 (provide 'org-doing)
