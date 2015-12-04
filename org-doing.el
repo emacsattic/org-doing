@@ -96,6 +96,9 @@ The first part of the `command' string is parsed as a command:
 - now: calls `org-doing-log'
 - later: calls `org-doing-log'
 - done: calls `org-doing-done'
+
+If no match is found, `org-doing-log' is called and passed the entire
+command string.
 "
   (interactive "sDoing? ")
   (let* ((first-space (search " " command))
@@ -105,7 +108,8 @@ The first part of the `command' string is parsed as a command:
                  nil)))
     (cond ((string= cmd "now") (org-doing-log args))
           ((string= cmd "later") (org-doing-log args t))
-          ((string= cmd "done") (org-doing-done args)))))
+          ((string= cmd "done") (org-doing-done args))
+          (t (org-doing-log (concat cmd " " args))))))
 
 
 (provide 'org-doing)
