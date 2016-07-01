@@ -18,10 +18,13 @@
    (should (org-doing "done"))))
 
 (ert-deftest org-doing-bury-buffer-after-logging ()
-  "After logging a task, the buffer should be buried."
+  "After logging a task, the buffer should be buried, unless configured otherwise."
   (mocklet (((bury-buffer) :times 2))
-   (org-doing-log "hello"))
-   (org-doing-done "world"))
+    (org-doing-log "hello")
+    (org-doing-done "world")
+    (let ((org-doing-bury-buffer nil))
+      (org-doing-log "hello")
+      (org-doing-done "world"))))
 
 (ert-deftest org-doing-save-buffer-after-logging ()
   "After logging a task, the buffer should be saved."

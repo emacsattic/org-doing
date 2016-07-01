@@ -38,6 +38,11 @@
   :type '(string)
   :group 'org-doing)
 
+(defcustom org-doing-bury-buffer t
+  "When non-nil, bury the org-doing buffer after updating it."
+  :type 'boolean
+  :group 'org-doing)
+
 (defun org-doing-find-or-create-file ()
   "Opens the `org-doing-file', if it doesn't exist, creates it.
 
@@ -64,7 +69,8 @@ later."
   (insert "* " (if later-p "LATER" "TODO") " " description "\n"
           "  " (format-time-string "<%Y-%m-%d %a %H:%M>\n"))
   (save-buffer)
-  (bury-buffer))
+  (when org-doing-bury-buffer
+    (bury-buffer)))
 
 (defun org-doing-done (description)
   "Inserts a new heading into `org-doing-file' that's marked as DONE.
@@ -81,7 +87,8 @@ TODO item as DONE (see `org-doing-done-most-recent-item'.)"
     (insert "* DONE " description "\n"
             "  " (format-time-string "<%Y-%m-%d %a %H:%M>\n")))
   (save-buffer)
-  (bury-buffer))
+  (when org-doing-bury-buffer
+    (bury-buffer)))
 
 (defun org-doing-done-most-recent-item ()
   "Marks the most recent item in `org-doing-file' as DONE."
