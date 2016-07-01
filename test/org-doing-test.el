@@ -20,8 +20,8 @@
 (ert-deftest org-doing-bury-buffer-after-logging ()
   "After logging a task, the buffer should be buried."
   (mocklet (((bury-buffer) :times 2))
-   (org-doing-log "hello"))
-   (org-doing-done "world"))
+   (org-doing-log "hello")
+   (org-doing-done "world")))
 
 (ert-deftest org-doing-save-buffer-after-logging ()
   "After logging a task, the buffer should be saved."
