@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/omouse/org-doing.svg)](https://travis-ci.org/omouse/org-doing)
 [![MELPA](http://melpa.org/packages/org-doing-badge.svg)](http://melpa.org/#/org-doing)
 [![License](http://img.shields.io/:license-gpl3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
+[![Flattr This](http://button.flattr.com/flattr-badge-large.png)](https://flattr.com/submit/auto?fid=y0jx3j&url=https%3A%2F%2Fgithub.com%2Fomouse%2Forg-doing)
 
 Inspired by [doing](https://github.com/ttscoff/doing/), a set of
 functions for keeping track of what you're doing right now.
