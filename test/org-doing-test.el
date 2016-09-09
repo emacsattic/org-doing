@@ -23,6 +23,17 @@
    (stub org-doing-done => t)
    (should (org-doing "done"))))
 
+(ert-deftest org-doing-next-with-no-arg ()
+  "Org-doing omni command should handle next with no additional arguments."
+  (with-mock
+    (stub org-doing-start-next => t)
+    (should (org-doing "next"))))
+
+(ert-deftest org-doing-next-with--args ()
+  "Org-doing omni command should handle next with arguments."
+  (with-mock
+    (stub org-doing-log => t)
+    (should (org-doing "next some stuff"))))
 
 (ert-deftest org-doing-save-buffer-after-logging ()
   "After logging a task, the buffer should be saved."

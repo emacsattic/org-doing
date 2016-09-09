@@ -104,6 +104,12 @@ TODO item as DONE (see `org-doing-done-most-recent-item'.)"
   (if (search-forward-regexp "^* TODO" nil t)
     (org-todo 'done)))
 
+(defun org-doing-start-next ()
+  "Promotes the recent LATER item to TODO."
+  (with-org-doing-file
+    (when (search-forward-regexp "^* LATER" nil t)
+      (org-todo "TODO"))))
+
 ;;;###autoload
 (defun org-doing (command)
   "Interactive function for running any org-doing command.
@@ -112,6 +118,8 @@ The first part of the `command' string is parsed as a command:
 - now: calls `org-doing-log'
 - later: calls `org-doing-log'
 - done: calls `org-doing-done'
+- next: used alone, calls `org-doing-start-next'
+        otherwise calls `org-doing-log'
 
 If no match is found, `org-doing-log' is called and passed the entire
 command string.
@@ -125,6 +133,8 @@ command string.
     (cond ((string= cmd "now") (org-doing-log args))
           ((string= cmd "later") (org-doing-log args t))
           ((string= cmd "done") (org-doing-done args))
+          ((string= cmd "next") (if args (org-doing-log args)
+                                  (org-doing-start-next)))
           (t (org-doing-log command)))))
 
 
