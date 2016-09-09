@@ -57,6 +57,12 @@ Creates the file if it does not already exist.
      (when org-doing-remain-in-buffer
        (switch-to-buffer org-doing-buffer))))
 
+(defun org-doing-find-or-create-file ()
+  (interactive)
+  "Opens the `org-doing-file', creating it if necessary."
+  (let ((org-doing-remain-in-buffer t))
+    (with-org-doing-file)))
+
 (defun initialize-org-doing-buffer ()
   "Prepares the org-doing buffer for use.
 
