@@ -46,10 +46,11 @@
   "After logging a task, the current buffer should be restored unless configured otherwise."
   (with-mock
     (stub save-buffer => t)
-    (org-doing-log "hello")
-    (org-doing-done "world")
-    (should (not (org-doing-buffer-current-p)))
-    (let ((org-doing-stay-in-buffer t))
+    (let ((org-doing-remain-in-buffer nil))
+      (org-doing-log "hello")
+      (org-doing-done "world")
+      (should (not (org-doing-buffer-current-p))))
+    (let ((org-doing-remain-in-buffer t))
       (org-doing-log "hello")
       (org-doing-done "world")
       (should (org-doing-buffer-current-p)))))
