@@ -38,16 +38,31 @@
   :type '(string)
   :group 'org-doing)
 
-(defcustom org-doing-bury-buffer t
-  "When non-nil, bury the org-doing buffer after updating it."
+(defcustom org-doing-remain-in-buffer nil
+  "When non-nil, the org-doing buffer remains active after logging an item."
   :type 'boolean
   :group 'org-doing)
 
-(defun org-doing-find-or-create-file ()
-  "Opens the `org-doing-file', if it doesn't exist, creates it.
+(defmacro with-org-doing-file (&rest body)
+  "Execute the forms in BODY to update the `org-doing-file'.
 
-If it exists, goes to the beginning of the file."
-  (find-file org-doing-file)
+Creates the file if it does not already exist.
+"
+  (declare (indent defun) (debug t))
+  `(let ((org-doing-buffer (find-file-noselect org-doing-file)))
+     (with-current-buffer org-doing-buffer
+       (initialize-org-doing-buffer)
+       ,@body
+       (save-buffer))
+     (when org-doing-remain-in-buffer
+       (switch-to-buffer org-doing-buffer))))
+
+(defun initialize-org-doing-buffer ()
+  "Prepares the org-doing buffer for use.
+
+If the file already exists, goes to the beginning of the buffer.
+Otherwise inserts the initial file content.
+"
   (if (file-exists-p org-doing-file)
       (goto-char (point-min))
     (insert "#+TITLE: doing\n"
@@ -62,15 +77,12 @@ If it exists, goes to the beginning of the file."
 When `later-p' is true, logs the item as something to be done
 later."
   (interactive "sDoing? \nP")
-  (org-doing-find-or-create-file)
-  (if (search-forward-regexp "^* " nil t)
-      (beginning-of-line)
-    (goto-char (point-max)))
-  (insert "* " (if later-p "LATER" "TODO") " " description "\n"
-          "  " (format-time-string "<%Y-%m-%d %a %H:%M>\n"))
-  (save-buffer)
-  (when org-doing-bury-buffer
-    (bury-buffer)))
+  (with-org-doing-file
+    (if (search-forward-regexp "^* " nil t)
+        (beginning-of-line)
+      (goto-char (point-max)))
+    (insert "* " (if later-p "LATER" "TODO") " " description "\n"
+            "  " (format-time-string "<%Y-%m-%d %a %H:%M>\n"))))
 
 (defun org-doing-done (description)
   "Inserts a new heading into `org-doing-file' that's marked as DONE.
@@ -78,17 +90,14 @@ later."
 If `description' is nil or a blank string, marks the most recent
 TODO item as DONE (see `org-doing-done-most-recent-item'.)"
   (interactive "sDone? ")
-  (org-doing-find-or-create-file)
-  (if (zerop (length description))
-      (org-doing-done-most-recent-item)
-    (if (search-forward-regexp "^* " nil t)
-        (beginning-of-line)
-      (goto-char (point-max)))
-    (insert "* DONE " description "\n"
-            "  " (format-time-string "<%Y-%m-%d %a %H:%M>\n")))
-  (save-buffer)
-  (when org-doing-bury-buffer
-    (bury-buffer)))
+  (with-org-doing-file
+    (if (zerop (length description))
+        (org-doing-done-most-recent-item)
+      (if (search-forward-regexp "^* " nil t)
+          (beginning-of-line)
+        (goto-char (point-max)))
+      (insert "* DONE " description "\n"
+              "  " (format-time-string "<%Y-%m-%d %a %H:%M>\n")))))
 
 (defun org-doing-done-most-recent-item ()
   "Marks the most recent item in `org-doing-file' as DONE."
