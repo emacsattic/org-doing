@@ -23,17 +23,40 @@
    (stub org-doing-done => t)
    (should (org-doing "done"))))
 
-(ert-deftest org-doing-bury-buffer-after-logging ()
-  "After logging a task, the buffer should be buried, unless configured otherwise."
-  (mocklet (((bury-buffer) :times 2))
-    (org-doing-log "hello")
-    (org-doing-done "world")
-    (let ((org-doing-bury-buffer nil))
-      (org-doing-log "hello")
-      (org-doing-done "world"))))
+(ert-deftest org-doing-next-with-no-arg ()
+  "Org-doing omni command should handle next with no additional arguments."
+  (with-mock
+    (stub org-doing-start-next => t)
+    (should (org-doing "next"))))
+
+(ert-deftest org-doing-next-with--args ()
+  "Org-doing omni command should handle next with arguments."
+  (with-mock
+    (stub org-doing-log => t)
+    (should (org-doing "next some stuff"))))
 
 (ert-deftest org-doing-save-buffer-after-logging ()
   "After logging a task, the buffer should be saved."
-  (mocklet (((save-buffer) :times 2))
+  (with-mock
+    (mock (save-buffer) => t :times 2)
     (org-doing-log "hello")
     (org-doing-done "world")))
+
+(ert-deftest org-doing-current-buffer-after-logging ()
+  "After logging a task, the current buffer should be restored unless configured otherwise."
+  (with-mock
+    (stub save-buffer => t)
+    (let ((org-doing-remain-in-buffer nil))
+      (org-doing-log "hello")
+      (org-doing-done "world")
+      (should (not (org-doing-buffer-current-p))))
+    (let ((org-doing-remain-in-buffer t))
+      (org-doing-log "hello")
+      (org-doing-done "world")
+      (should (org-doing-buffer-current-p)))))
+
+(defun org-doing-buffer-current-p ()
+  "Return non-nil if current buffer is visiting the `org-doing-file'."
+  (when buffer-file-name
+    (equal (expand-file-name buffer-file-name)
+           (expand-file-name org-doing-file))))
