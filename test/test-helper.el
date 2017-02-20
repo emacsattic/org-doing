@@ -35,5 +35,4 @@
 (require 'el-mock)
 (require 'org-doing (f-expand "org-doing" org-doing-root-path))
 
-(provide 'test-helper)
 ;;; test-helper.el ends here
